@@ -1,0 +1,146 @@
+object FrmMain: TFrmMain
+  Left = 389
+  Height = 598
+  Top = 265
+  Width = 680
+  Caption = 'Telegram bot utility'
+  ClientHeight = 598
+  ClientWidth = 680
+  DesignTimePPI = 120
+  SessionProperties = 'EdtToken.Text;VlLstEdtrCommands.Strings'
+  LCLVersion = '2.2.0.2'
+  object EdtToken: TLabeledEdit
+    Left = 16
+    Height = 28
+    Top = 40
+    Width = 648
+    EditLabel.Height = 20
+    EditLabel.Width = 648
+    EditLabel.Caption = 'Bot''s token'
+    TabOrder = 0
+  end
+  object PgCntrl: TPageControl
+    Left = 0
+    Height = 184
+    Top = 120
+    Width = 682
+    ActivePage = TbShtSetMyCommands
+    Anchors = [akTop, akLeft, akRight]
+    TabIndex = 5
+    TabOrder = 1
+    object TbShtGetMe: TTabSheet
+      Caption = 'getMe'
+      ClientHeight = 151
+      ClientWidth = 674
+      object EdtBotUsername: TLabeledEdit
+        Left = 8
+        Height = 28
+        Top = 32
+        Width = 376
+        Color = clBtnFace
+        EditLabel.Height = 20
+        EditLabel.Width = 376
+        EditLabel.Caption = 'Bot username'
+        ReadOnly = True
+        TabOrder = 0
+      end
+    end
+    object TbShtGetWebhookInfo: TTabSheet
+      Caption = 'getWebhookInfo'
+    end
+    object TbShtSetWebhook: TTabSheet
+      Caption = 'setWebhook'
+      ClientHeight = 151
+      ClientWidth = 674
+      object EdtWebhookUrl: TLabeledEdit
+        Left = 16
+        Height = 28
+        Top = 32
+        Width = 640
+        EditLabel.Height = 20
+        EditLabel.Width = 640
+        EditLabel.Caption = 'Webhook URL'
+        TabOrder = 0
+      end
+    end
+    object TbShtGetUpdates: TTabSheet
+      Caption = 'getUpdates'
+      ClientHeight = 151
+      ClientWidth = 674
+      object EdtOffset: TSpinEdit
+        Left = 16
+        Height = 28
+        Top = 32
+        Width = 152
+        TabOrder = 0
+      end
+      object Label1: TLabel
+        Left = 16
+        Height = 20
+        Top = 8
+        Width = 40
+        Caption = 'Offset'
+      end
+    end
+    object TbShtGetMyCommands: TTabSheet
+      Caption = 'getMyCommands'
+    end
+    object TbShtSetMyCommands: TTabSheet
+      Caption = 'setMyCommands'
+      ClientHeight = 151
+      ClientWidth = 674
+      object VlLstEdtrCommands: TValueListEditor
+        Left = 0
+        Height = 151
+        Top = 0
+        Width = 674
+        Align = alClient
+        DefaultColWidth = 160
+        FixedCols = 0
+        Flat = True
+        RowCount = 3
+        TabOrder = 0
+        TitleStyle = tsNative
+        KeyOptions = [keyEdit, keyAdd, keyDelete, keyUnique]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goAutoAddRows, goAlwaysShowEditor, goThumbTracking, goDblClickAutoSize]
+        Strings.Strings = (
+          ''
+          ''
+        )
+        TitleCaptions.Strings = (
+          'Command'
+          'Description'
+        )
+        ColWidths = (
+          160
+          513
+        )
+      end
+    end
+  end
+  object BtnSendRequest: TButton
+    Left = 16
+    Height = 31
+    Top = 80
+    Width = 94
+    Caption = 'Send'
+    OnClick = BtnSendRequestClick
+    TabOrder = 2
+  end
+  object MmResponse: TMemo
+    Left = 0
+    Height = 294
+    Top = 304
+    Width = 680
+    Align = alBottom
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ScrollBars = ssVertical
+    TabOrder = 3
+  end
+  object JSONPrpStrg: TJSONPropStorage
+    StoredValues = <>
+    Formatted = False
+    Left = 452
+    Top = 72
+  end
+end
