@@ -8,7 +8,7 @@ object FrmMain: TFrmMain
   ClientWidth = 680
   DesignTimePPI = 120
   SessionProperties = 'EdtToken.Text;VlLstEdtrCommands.Strings'
-  LCLVersion = '2.2.0.2'
+  LCLVersion = '2.2.0.4'
   object EdtToken: TLabeledEdit
     Left = 16
     Height = 28
@@ -91,8 +91,8 @@ object FrmMain: TFrmMain
       ClientWidth = 674
       object VlLstEdtrCommands: TValueListEditor
         Left = 0
-        Height = 151
-        Top = 0
+        Height = 118
+        Top = 33
         Width = 674
         Align = alClient
         DefaultColWidth = 160
@@ -116,6 +116,23 @@ object FrmMain: TFrmMain
           513
         )
       end
+      object TlBrsetMyCommands: TToolBar
+        Left = 0
+        Height = 33
+        Top = 0
+        Width = 674
+        Caption = 'TlBrsetMyCommands'
+        TabOrder = 1
+        object BtnClear: TButton
+          Left = 1
+          Height = 28
+          Top = 2
+          Width = 94
+          Caption = '🆑 clear'
+          OnClick = BtnClearClick
+          TabOrder = 0
+        end
+      end
     end
   end
   object BtnSendRequest: TButton
@@ -134,6 +151,7 @@ object FrmMain: TFrmMain
     Width = 680
     Align = alBottom
     Anchors = [akTop, akLeft, akRight, akBottom]
+    ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 3
   end

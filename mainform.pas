@@ -15,6 +15,7 @@ type
 
   TFrmMain = class(TForm)
     BtnSendRequest: TButton;
+    BtnClear: TButton;
     EdtToken: TLabeledEdit;
     JSONPrpStrg: TJSONPropStorage;
     EdtWebhookUrl: TLabeledEdit;
@@ -29,7 +30,9 @@ type
     TbShtSetWebhook: TTabSheet;
     TbShtGetWebhookInfo: TTabSheet;
     TbShtGetMe: TTabSheet;
+    TlBrsetMyCommands: TToolBar;
     VlLstEdtrCommands: TValueListEditor;
+    procedure BtnClearClick(Sender: TObject);
     procedure BtnSendRequestClick({%H-}Sender: TObject);
     procedure SetMyCommands(aBot: TTelegramSender);
   private
@@ -117,6 +120,11 @@ begin
   finally
     aBot.Free;
   end;
+end;
+
+procedure TFrmMain.BtnClearClick(Sender: TObject);
+begin
+  VlLstEdtrCommands.Clear;
 end;
 
 procedure TFrmMain.SetMyCommands(aBot: TTelegramSender);
