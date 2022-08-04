@@ -27,8 +27,8 @@ type
     PgCntrl: TPageControl;
     EdtOffset: TSpinEdit;
     EdtSpecificChatID: TSpinEditEx;
-    TbShtSetMyCommands: TTabSheet;
-    TbShtGetMyCommands: TTabSheet;
+    TbCntrlMyCommands: TTabControl;
+    TbShtMyCommands: TTabSheet;
     TbShtGetUpdates: TTabSheet;
     TbShtSetWebhook: TTabSheet;
     TbShtGetWebhookInfo: TTabSheet;
@@ -37,6 +37,8 @@ type
     VlLstEdtrCommands: TValueListEditor;
     procedure BtnClearClick(Sender: TObject);
     procedure BtnSendRequestClick({%H-}Sender: TObject);
+    procedure ExtractScopeFromControls(aScope: TBotCommandScope);
+    procedure GetMyCommands(aBot: TTelegramSender);
     procedure SetMyCommands(aBot: TTelegramSender);
   private
 
@@ -107,14 +109,12 @@ begin
         aBot.getUpdates(EdtOffset.Value);
         Exit;
       end;
-      if PgCntrl.ActivePage=TbShtGetMyCommands then
+      if PgCntrl.ActivePage=TbShtMyCommands then
       begin
-        aBot.getMyCommands;
-        Exit;
-      end;
-      if PgCntrl.ActivePage=TbShtSetMyCommands then
-      begin
-        SetMyCommands(aBot);
+        if TbCntrlMyCommands.TabIndex=1 then
+          SetMyCommands(aBot)
+        else
+          GetMyCommands(aBot);
         Exit;
       end;
     finally
@@ -122,6 +122,33 @@ begin
     end;
   finally
     aBot.Free;
+  end;
+end;
+
+procedure TFrmMain.ExtractScopeFromControls(aScope: TBotCommandScope);
+var
+  aIndex: Integer;
+begin
+  aIndex:=CmbBxCommandScope.ItemIndex;
+  if aIndex=-1 then
+    aIndex:=0;
+  aScope.ScopeType:=TCommandScopeType(aIndex);
+  if aScope.ScopeType>=stSpecificChat then
+    aScope.ChatID:=EdtSpecificChatID.Value;
+  if aScope.ScopeType=stChatMember then
+    aScope.UserID:=EdtSpecificUserID.Value;
+end;
+
+procedure TFrmMain.GetMyCommands(aBot: TTelegramSender);
+var
+  aScope: TBotCommandScope;
+begin
+  aScope:=TBotCommandScope.Create;
+  try
+    ExtractScopeFromControls(aScope);
+    aBot.getMyCommands(aScope);
+  finally
+    aScope.Free;
   end;
 end;
 
@@ -133,7 +160,7 @@ end;
 procedure TFrmMain.SetMyCommands(aBot: TTelegramSender);
 var
   aBotCommands: TBotCommandArray;
-  i, aIndex: Integer;
+  i: Integer;
   aScope: TBotCommandScope;
 begin
   aBotCommands:=TBotCommandArray.Create();
@@ -142,14 +169,7 @@ begin
     for i:=1 to VlLstEdtrCommands.Strings.Count do
       with VlLstEdtrCommands do
         aBotCommands.AddCommand(Keys[i], Values[Keys[i]]);
-    aIndex:=CmbBxCommandScope.ItemIndex;
-    if CmbBxCommandScope.ItemIndex=-1 then
-      aIndex:=0;
-    aScope.ScopeType:=TCommandScopeType(aIndex);
-    if aScope.ScopeType>=stSpecificChat then
-      aScope.ChatID:=EdtSpecificChatID.Value;
-    if aScope.ScopeType=stChatMember then
-      aScope.UserID:=EdtSpecificUserID.Value;
+    ExtractScopeFromControls(aScope);
     aBot.setMyCommands(aBotCommands, aScope);
   finally
     aScope.Free;

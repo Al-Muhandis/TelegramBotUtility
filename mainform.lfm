@@ -26,9 +26,9 @@ object FrmMain: TFrmMain
     Height = 184
     Top = 120
     Width = 743
-    ActivePage = TbShtGetMe
+    ActivePage = TbShtMyCommands
     Anchors = [akTop, akLeft, akRight]
-    TabIndex = 0
+    TabIndex = 4
     TabOrder = 1
     object TbShtGetMe: TTabSheet
       Caption = 'getMe'
@@ -87,105 +87,115 @@ object FrmMain: TFrmMain
         ParentColor = False
       end
     end
-    object TbShtGetMyCommands: TTabSheet
-      Caption = 'getMyCommands'
-    end
-    object TbShtSetMyCommands: TTabSheet
-      Caption = 'setMyCommands'
+    object TbShtMyCommands: TTabSheet
+      Caption = 'MyCommands'
       ClientHeight = 151
       ClientWidth = 735
-      object VlLstEdtrCommands: TValueListEditor
+      object TbCntrlMyCommands: TTabControl
         Left = 0
-        Height = 118
-        Top = 33
-        Width = 735
-        Align = alClient
-        DefaultColWidth = 160
-        FixedCols = 0
-        Flat = True
-        RowCount = 3
-        TabOrder = 0
-        TitleStyle = tsNative
-        KeyOptions = [keyEdit, keyAdd, keyDelete, keyUnique]
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goAutoAddRows, goAlwaysShowEditor, goThumbTracking, goDblClickAutoSize]
-        Strings.Strings = (
-          ''
-          ''
-        )
-        TitleCaptions.Strings = (
-          'Command'
-          'Description'
-        )
-        ColWidths = (
-          160
-          574
-        )
-      end
-      object TlBrsetMyCommands: TToolBar
-        Left = 0
-        Height = 33
+        Height = 151
         Top = 0
         Width = 735
-        Caption = 'TlBrsetMyCommands'
-        TabOrder = 1
-        object BtnClear: TButton
-          Left = 1
-          Height = 28
-          Top = 2
-          Width = 94
-          Caption = '🆑 clear'
-          OnClick = BtnClearClick
-          TabOrder = 0
-        end
-        object CmbBxCommandScope: TComboBox
-          Left = 95
-          Height = 28
-          Top = 2
-          Width = 241
-          ItemHeight = 20
-          Items.Strings = (
-            'Default scope'
-            'All private chats'
-            'All Group Chats'
-            'All Chat Administrators'
-            'Specific chat'
-          )
+        TabIndex = 0
+        Tabs.Strings = (
+          'getMyCommands'
+          'setMyCommands'
+        )
+        Align = alClient
+        TabOrder = 0
+        object TlBrsetMyCommands: TToolBar
+          Left = 2
+          Height = 33
+          Top = 28
+          Width = 731
+          Caption = 'TlBrsetMyCommands'
           TabOrder = 1
-          TextHint = 'Select the scope of bot commands'
+          object BtnClear: TButton
+            Left = 1
+            Height = 28
+            Top = 2
+            Width = 94
+            Caption = '🆑 clear'
+            OnClick = BtnClearClick
+            TabOrder = 0
+          end
+          object CmbBxCommandScope: TComboBox
+            Left = 95
+            Height = 28
+            Top = 2
+            Width = 241
+            ItemHeight = 20
+            Items.Strings = (
+              'Default scope'
+              'All private chats'
+              'All Group Chats'
+              'All Chat Administrators'
+              'Specific chat'
+            )
+            TabOrder = 1
+            TextHint = 'Select the scope of bot commands'
+          end
+          object EdtSpecificChatID: TSpinEditEx
+            Left = 336
+            Height = 28
+            Hint = 'Please select specific chat_id.'#13#10'Relevant if the specific chat scope is selected'
+            Top = 2
+            Width = 177
+            MaxLength = 0
+            NumbersOnly = True
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 2
+            TextHint = 'chat_id'
+            NullValue = 0
+            NullValueBehaviour = nvbShowTextHint
+            UpDownVisible = False
+            Value = 0
+          end
+          object EdtSpecificUserID: TSpinEditEx
+            Left = 513
+            Height = 28
+            Hint = 'Please select specific chat_id.'#13#10'Relevant if the specific chat scope is selected'
+            Top = 2
+            Width = 177
+            MaxLength = 0
+            NumbersOnly = True
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 3
+            TextHint = 'user_id'
+            NullValue = 0
+            NullValueBehaviour = nvbShowTextHint
+            UpDownVisible = False
+            Value = 0
+          end
         end
-        object EdtSpecificChatID: TSpinEditEx
-          Left = 336
-          Height = 28
-          Hint = 'Please select specific chat_id.'#13#10'Relevant if the specific chat scope is selected'
-          Top = 2
-          Width = 177
-          MaxLength = 0
-          NumbersOnly = True
-          ParentShowHint = False
-          ShowHint = True
+        object VlLstEdtrCommands: TValueListEditor
+          Left = 2
+          Height = 88
+          Top = 61
+          Width = 731
+          Align = alClient
+          DefaultColWidth = 160
+          FixedCols = 0
+          Flat = True
+          RowCount = 3
           TabOrder = 2
-          TextHint = 'chat_id'
-          NullValue = 0
-          NullValueBehaviour = nvbShowTextHint
-          UpDownVisible = False
-          Value = 0
-        end
-        object EdtSpecificUserID: TSpinEditEx
-          Left = 513
-          Height = 28
-          Hint = 'Please select specific chat_id.'#13#10'Relevant if the specific chat scope is selected'
-          Top = 2
-          Width = 177
-          MaxLength = 0
-          NumbersOnly = True
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 3
-          TextHint = 'user_id'
-          NullValue = 0
-          NullValueBehaviour = nvbShowTextHint
-          UpDownVisible = False
-          Value = 0
+          TitleStyle = tsNative
+          KeyOptions = [keyEdit, keyAdd, keyDelete, keyUnique]
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goAutoAddRows, goAlwaysShowEditor, goThumbTracking, goDblClickAutoSize]
+          Strings.Strings = (
+            ''
+            ''
+          )
+          TitleCaptions.Strings = (
+            'Command'
+            'Description'
+          )
+          ColWidths = (
+            160
+            570
+          )
         end
       end
     end
