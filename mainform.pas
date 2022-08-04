@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, ComCtrls, JSONPropStorage, Spin, ValEdit,
-  tgtypes, SynEdit, tgsendertypes
+  tgtypes, SynEdit, SpinEx, tgsendertypes
   ;
 
 type
@@ -16,6 +16,8 @@ type
   TFrmMain = class(TForm)
     BtnSendRequest: TButton;
     BtnClear: TButton;
+    CmbBxCommandScope: TComboBox;
+    EdtSpecificUserID: TSpinEditEx;
     EdtToken: TLabeledEdit;
     JSONPrpStrg: TJSONPropStorage;
     EdtWebhookUrl: TLabeledEdit;
@@ -24,6 +26,7 @@ type
     MmResponse: TMemo;
     PgCntrl: TPageControl;
     EdtOffset: TSpinEdit;
+    EdtSpecificChatID: TSpinEditEx;
     TbShtSetMyCommands: TTabSheet;
     TbShtGetMyCommands: TTabSheet;
     TbShtGetUpdates: TTabSheet;
@@ -130,15 +133,26 @@ end;
 procedure TFrmMain.SetMyCommands(aBot: TTelegramSender);
 var
   aBotCommands: TBotCommandArray;
-  i: Integer;
+  i, aIndex: Integer;
+  aScope: TBotCommandScope;
 begin
   aBotCommands:=TBotCommandArray.Create();
+  aScope:=TBotCommandScope.Create;
   try
     for i:=1 to VlLstEdtrCommands.Strings.Count do
       with VlLstEdtrCommands do
         aBotCommands.AddCommand(Keys[i], Values[Keys[i]]);
-    aBot.setMyCommands(aBotCommands);
+    aIndex:=CmbBxCommandScope.ItemIndex;
+    if CmbBxCommandScope.ItemIndex=-1 then
+      aIndex:=0;
+    aScope.ScopeType:=TCommandScopeType(aIndex);
+    if aScope.ScopeType>=stSpecificChat then
+      aScope.ChatID:=EdtSpecificChatID.Value;
+    if aScope.ScopeType=stChatMember then
+      aScope.UserID:=EdtSpecificUserID.Value;
+    aBot.setMyCommands(aBotCommands, aScope);
   finally
+    aScope.Free;
     aBotCommands.Free;
   end;
 end;

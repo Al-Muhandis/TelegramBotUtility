@@ -2,13 +2,14 @@ object FrmMain: TFrmMain
   Left = 389
   Height = 598
   Top = 265
-  Width = 680
+  Width = 741
   Caption = 'Telegram bot utility'
   ClientHeight = 598
-  ClientWidth = 680
+  ClientWidth = 741
   DesignTimePPI = 120
   SessionProperties = 'EdtToken.Text;VlLstEdtrCommands.Strings'
-  LCLVersion = '2.2.0.4'
+  ShowHint = True
+  LCLVersion = '2.2.2.0'
   object EdtToken: TLabeledEdit
     Left = 16
     Height = 28
@@ -17,21 +18,22 @@ object FrmMain: TFrmMain
     EditLabel.Height = 20
     EditLabel.Width = 648
     EditLabel.Caption = 'Bot''s token'
+    EditLabel.ParentColor = False
     TabOrder = 0
   end
   object PgCntrl: TPageControl
     Left = 0
     Height = 184
     Top = 120
-    Width = 682
-    ActivePage = TbShtSetMyCommands
+    Width = 743
+    ActivePage = TbShtGetMe
     Anchors = [akTop, akLeft, akRight]
-    TabIndex = 5
+    TabIndex = 0
     TabOrder = 1
     object TbShtGetMe: TTabSheet
       Caption = 'getMe'
       ClientHeight = 151
-      ClientWidth = 674
+      ClientWidth = 735
       object EdtBotUsername: TLabeledEdit
         Left = 8
         Height = 28
@@ -41,6 +43,7 @@ object FrmMain: TFrmMain
         EditLabel.Height = 20
         EditLabel.Width = 376
         EditLabel.Caption = 'Bot username'
+        EditLabel.ParentColor = False
         ReadOnly = True
         TabOrder = 0
       end
@@ -51,7 +54,7 @@ object FrmMain: TFrmMain
     object TbShtSetWebhook: TTabSheet
       Caption = 'setWebhook'
       ClientHeight = 151
-      ClientWidth = 674
+      ClientWidth = 735
       object EdtWebhookUrl: TLabeledEdit
         Left = 16
         Height = 28
@@ -60,13 +63,14 @@ object FrmMain: TFrmMain
         EditLabel.Height = 20
         EditLabel.Width = 640
         EditLabel.Caption = 'Webhook URL'
+        EditLabel.ParentColor = False
         TabOrder = 0
       end
     end
     object TbShtGetUpdates: TTabSheet
       Caption = 'getUpdates'
       ClientHeight = 151
-      ClientWidth = 674
+      ClientWidth = 735
       object EdtOffset: TSpinEdit
         Left = 16
         Height = 28
@@ -80,6 +84,7 @@ object FrmMain: TFrmMain
         Top = 8
         Width = 40
         Caption = 'Offset'
+        ParentColor = False
       end
     end
     object TbShtGetMyCommands: TTabSheet
@@ -88,12 +93,12 @@ object FrmMain: TFrmMain
     object TbShtSetMyCommands: TTabSheet
       Caption = 'setMyCommands'
       ClientHeight = 151
-      ClientWidth = 674
+      ClientWidth = 735
       object VlLstEdtrCommands: TValueListEditor
         Left = 0
         Height = 118
         Top = 33
-        Width = 674
+        Width = 735
         Align = alClient
         DefaultColWidth = 160
         FixedCols = 0
@@ -113,14 +118,14 @@ object FrmMain: TFrmMain
         )
         ColWidths = (
           160
-          513
+          574
         )
       end
       object TlBrsetMyCommands: TToolBar
         Left = 0
         Height = 33
         Top = 0
-        Width = 674
+        Width = 735
         Caption = 'TlBrsetMyCommands'
         TabOrder = 1
         object BtnClear: TButton
@@ -131,6 +136,56 @@ object FrmMain: TFrmMain
           Caption = '🆑 clear'
           OnClick = BtnClearClick
           TabOrder = 0
+        end
+        object CmbBxCommandScope: TComboBox
+          Left = 95
+          Height = 28
+          Top = 2
+          Width = 241
+          ItemHeight = 20
+          Items.Strings = (
+            'Default scope'
+            'All private chats'
+            'All Group Chats'
+            'All Chat Administrators'
+            'Specific chat'
+          )
+          TabOrder = 1
+          TextHint = 'Select the scope of bot commands'
+        end
+        object EdtSpecificChatID: TSpinEditEx
+          Left = 336
+          Height = 28
+          Hint = 'Please select specific chat_id.'#13#10'Relevant if the specific chat scope is selected'
+          Top = 2
+          Width = 177
+          MaxLength = 0
+          NumbersOnly = True
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 2
+          TextHint = 'chat_id'
+          NullValue = 0
+          NullValueBehaviour = nvbShowTextHint
+          UpDownVisible = False
+          Value = 0
+        end
+        object EdtSpecificUserID: TSpinEditEx
+          Left = 513
+          Height = 28
+          Hint = 'Please select specific chat_id.'#13#10'Relevant if the specific chat scope is selected'
+          Top = 2
+          Width = 177
+          MaxLength = 0
+          NumbersOnly = True
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          TextHint = 'user_id'
+          NullValue = 0
+          NullValueBehaviour = nvbShowTextHint
+          UpDownVisible = False
+          Value = 0
         end
       end
     end
@@ -148,7 +203,7 @@ object FrmMain: TFrmMain
     Left = 0
     Height = 294
     Top = 304
-    Width = 680
+    Width = 741
     Align = alBottom
     Anchors = [akTop, akLeft, akRight, akBottom]
     ReadOnly = True
