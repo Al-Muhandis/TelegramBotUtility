@@ -1,10 +1,10 @@
 object FrmMain: TFrmMain
   Left = 389
-  Height = 598
-  Top = 265
+  Height = 634
+  Top = 229
   Width = 741
   Caption = 'Telegram bot utility'
-  ClientHeight = 598
+  ClientHeight = 634
   ClientWidth = 741
   DesignTimePPI = 120
   SessionProperties = 'EdtToken.Text;VlLstEdtrCommands.Strings'
@@ -23,16 +23,16 @@ object FrmMain: TFrmMain
   end
   object PgCntrl: TPageControl
     Left = 0
-    Height = 184
+    Height = 224
     Top = 120
     Width = 743
-    ActivePage = TbShtMyCommands
+    ActivePage = TbShtGetMe
     Anchors = [akTop, akLeft, akRight]
-    TabIndex = 4
+    TabIndex = 0
     TabOrder = 1
     object TbShtGetMe: TTabSheet
       Caption = 'getMe'
-      ClientHeight = 151
+      ClientHeight = 191
       ClientWidth = 735
       object EdtBotUsername: TLabeledEdit
         Left = 8
@@ -53,7 +53,7 @@ object FrmMain: TFrmMain
     end
     object TbShtSetWebhook: TTabSheet
       Caption = 'setWebhook'
-      ClientHeight = 151
+      ClientHeight = 191
       ClientWidth = 735
       object EdtWebhookUrl: TLabeledEdit
         Left = 16
@@ -69,7 +69,7 @@ object FrmMain: TFrmMain
     end
     object TbShtGetUpdates: TTabSheet
       Caption = 'getUpdates'
-      ClientHeight = 151
+      ClientHeight = 191
       ClientWidth = 735
       object EdtOffset: TSpinEdit
         Left = 16
@@ -89,11 +89,11 @@ object FrmMain: TFrmMain
     end
     object TbShtMyCommands: TTabSheet
       Caption = 'MyCommands'
-      ClientHeight = 151
+      ClientHeight = 191
       ClientWidth = 735
       object TbCntrlMyCommands: TTabControl
         Left = 0
-        Height = 151
+        Height = 191
         Top = 0
         Width = 735
         TabIndex = 0
@@ -172,7 +172,7 @@ object FrmMain: TFrmMain
         end
         object VlLstEdtrCommands: TValueListEditor
           Left = 2
-          Height = 88
+          Height = 128
           Top = 61
           Width = 731
           Align = alClient
@@ -199,6 +199,40 @@ object FrmMain: TFrmMain
         end
       end
     end
+    object TbShtSendMessage: TTabSheet
+      Caption = 'sendMessage'
+      ClientHeight = 191
+      ClientWidth = 735
+      object MmMessage: TMemo
+        Left = 296
+        Height = 191
+        Top = 0
+        Width = 439
+        Align = alRight
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+      end
+      object EdtReceiverChatID: TSpinEditEx
+        Left = 0
+        Height = 28
+        Top = 32
+        Width = 288
+        MaxLength = 0
+        TabOrder = 1
+        NullValue = 0
+        UpDownVisible = False
+        Value = 0
+      end
+      object LblReceiverChatID: TLabel
+        Left = 8
+        Height = 20
+        Top = 10
+        Width = 105
+        Caption = 'Receiver chat id'
+        FocusControl = EdtReceiverChatID
+        ParentColor = False
+      end
+    end
   end
   object BtnSendRequest: TButton
     Left = 16
@@ -211,8 +245,8 @@ object FrmMain: TFrmMain
   end
   object MmResponse: TMemo
     Left = 0
-    Height = 294
-    Top = 304
+    Height = 290
+    Top = 344
     Width = 741
     Align = alBottom
     Anchors = [akTop, akLeft, akRight, akBottom]

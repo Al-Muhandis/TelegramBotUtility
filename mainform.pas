@@ -23,10 +23,14 @@ type
     EdtWebhookUrl: TLabeledEdit;
     EdtBotUsername: TLabeledEdit;
     Label1: TLabel;
+    LblReceiverChatID: TLabel;
+    MmMessage: TMemo;
     MmResponse: TMemo;
     PgCntrl: TPageControl;
     EdtOffset: TSpinEdit;
     EdtSpecificChatID: TSpinEditEx;
+    EdtReceiverChatID: TSpinEditEx;
+    TbShtSendMessage: TTabSheet;
     TbCntrlMyCommands: TTabControl;
     TbShtMyCommands: TTabSheet;
     TbShtGetUpdates: TTabSheet;
@@ -115,6 +119,11 @@ begin
           SetMyCommands(aBot)
         else
           GetMyCommands(aBot);
+        Exit;
+      end;
+      if PgCntrl.ActivePage=TbShtSendMessage then
+      begin
+        aBot.sendMessage(EdtReceiverChatID.Value, MmMessage.Text);
         Exit;
       end;
     finally
