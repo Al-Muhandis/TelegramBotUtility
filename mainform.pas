@@ -19,6 +19,7 @@ type
     CmbBxCommandScope: TComboBox;
     EdtSpecificUserID: TSpinEditEx;
     EdtToken: TLabeledEdit;
+    GrpBx: TGroupBox;
     JSONPrpStrg: TJSONPropStorage;
     EdtWebhookUrl: TLabeledEdit;
     EdtBotUsername: TLabeledEdit;
@@ -30,6 +31,7 @@ type
     EdtOffset: TSpinEdit;
     EdtSpecificChatID: TSpinEditEx;
     EdtReceiverChatID: TSpinEditEx;
+    Spltr: TSplitter;
     TbShtSendMessage: TTabSheet;
     TbCntrlMyCommands: TTabControl;
     TbShtMyCommands: TTabSheet;

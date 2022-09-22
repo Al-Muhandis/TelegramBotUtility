@@ -7,32 +7,22 @@ object FrmMain: TFrmMain
   ClientHeight = 634
   ClientWidth = 741
   DesignTimePPI = 120
-  SessionProperties = 'EdtToken.Text;VlLstEdtrCommands.Strings'
+  SessionProperties = 'EdtToken.Text;VlLstEdtrCommands.Strings;Spltr.Top'
   ShowHint = True
   LCLVersion = '2.2.2.0'
-  object EdtToken: TLabeledEdit
-    Left = 16
-    Height = 28
-    Top = 40
-    Width = 648
-    EditLabel.Height = 20
-    EditLabel.Width = 648
-    EditLabel.Caption = 'Bot''s token'
-    EditLabel.ParentColor = False
-    TabOrder = 0
-  end
   object PgCntrl: TPageControl
     Left = 0
-    Height = 224
-    Top = 120
+    Height = 248
+    Top = 96
     Width = 743
     ActivePage = TbShtGetMe
+    Align = alClient
     Anchors = [akTop, akLeft, akRight]
     TabIndex = 0
-    TabOrder = 1
+    TabOrder = 0
     object TbShtGetMe: TTabSheet
       Caption = 'getMe'
-      ClientHeight = 191
+      ClientHeight = 215
       ClientWidth = 735
       object EdtBotUsername: TLabeledEdit
         Left = 8
@@ -53,7 +43,7 @@ object FrmMain: TFrmMain
     end
     object TbShtSetWebhook: TTabSheet
       Caption = 'setWebhook'
-      ClientHeight = 191
+      ClientHeight = 215
       ClientWidth = 735
       object EdtWebhookUrl: TLabeledEdit
         Left = 16
@@ -69,7 +59,7 @@ object FrmMain: TFrmMain
     end
     object TbShtGetUpdates: TTabSheet
       Caption = 'getUpdates'
-      ClientHeight = 191
+      ClientHeight = 215
       ClientWidth = 735
       object EdtOffset: TSpinEdit
         Left = 16
@@ -89,11 +79,11 @@ object FrmMain: TFrmMain
     end
     object TbShtMyCommands: TTabSheet
       Caption = 'MyCommands'
-      ClientHeight = 191
+      ClientHeight = 215
       ClientWidth = 735
       object TbCntrlMyCommands: TTabControl
         Left = 0
-        Height = 191
+        Height = 215
         Top = 0
         Width = 735
         TabIndex = 0
@@ -172,7 +162,7 @@ object FrmMain: TFrmMain
         end
         object VlLstEdtrCommands: TValueListEditor
           Left = 2
-          Height = 128
+          Height = 152
           Top = 61
           Width = 731
           Align = alClient
@@ -201,11 +191,11 @@ object FrmMain: TFrmMain
     end
     object TbShtSendMessage: TTabSheet
       Caption = 'sendMessage'
-      ClientHeight = 191
+      ClientHeight = 215
       ClientWidth = 735
       object MmMessage: TMemo
         Left = 296
-        Height = 191
+        Height = 215
         Top = 0
         Width = 439
         Align = alRight
@@ -234,15 +224,6 @@ object FrmMain: TFrmMain
       end
     end
   end
-  object BtnSendRequest: TButton
-    Left = 16
-    Height = 31
-    Top = 80
-    Width = 94
-    Caption = 'Send'
-    OnClick = BtnSendRequestClick
-    TabOrder = 2
-  end
   object MmResponse: TMemo
     Left = 0
     Height = 290
@@ -252,7 +233,47 @@ object FrmMain: TFrmMain
     Anchors = [akTop, akLeft, akRight, akBottom]
     ReadOnly = True
     ScrollBars = ssVertical
+    TabOrder = 1
+  end
+  object Spltr: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 6
+    Top = 338
+    Width = 741
+    Align = alBottom
+    ResizeAnchor = akBottom
+  end
+  object GrpBx: TGroupBox
+    Left = 0
+    Height = 96
+    Top = 0
+    Width = 741
+    Align = alTop
+    Caption = 'GrpBx'
+    ClientHeight = 71
+    ClientWidth = 737
     TabOrder = 3
+    object EdtToken: TLabeledEdit
+      Left = 16
+      Height = 28
+      Top = 24
+      Width = 592
+      EditLabel.Height = 20
+      EditLabel.Width = 592
+      EditLabel.Caption = 'Bot''s token'
+      EditLabel.ParentColor = False
+      TabOrder = 0
+    end
+    object BtnSendRequest: TButton
+      Left = 616
+      Height = 47
+      Top = 5
+      Width = 110
+      Caption = 'Send'
+      OnClick = BtnSendRequestClick
+      TabOrder = 1
+    end
   end
   object JSONPrpStrg: TJSONPropStorage
     StoredValues = <>
