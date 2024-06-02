@@ -9,12 +9,12 @@ object FrmMain: TFrmMain
   DesignTimePPI = 120
   SessionProperties = 'EdtToken.Text;VlLstEdtrCommands.Strings;Spltr.Top'
   ShowHint = True
-  LCLVersion = '2.2.2.0'
+  LCLVersion = '3.4.0.0'
   object PgCntrl: TPageControl
     Left = 0
-    Height = 248
+    Height = 242
     Top = 96
-    Width = 743
+    Width = 741
     ActivePage = TbShtGetMe
     Align = alClient
     Anchors = [akTop, akLeft, akRight]
@@ -22,8 +22,8 @@ object FrmMain: TFrmMain
     TabOrder = 0
     object TbShtGetMe: TTabSheet
       Caption = 'getMe'
-      ClientHeight = 215
-      ClientWidth = 735
+      ClientHeight = 209
+      ClientWidth = 733
       object EdtBotUsername: TLabeledEdit
         Left = 8
         Height = 28
@@ -43,8 +43,8 @@ object FrmMain: TFrmMain
     end
     object TbShtSetWebhook: TTabSheet
       Caption = 'setWebhook'
-      ClientHeight = 215
-      ClientWidth = 735
+      ClientHeight = 209
+      ClientWidth = 733
       object EdtWebhookUrl: TLabeledEdit
         Left = 16
         Height = 28
@@ -59,8 +59,8 @@ object FrmMain: TFrmMain
     end
     object TbShtGetUpdates: TTabSheet
       Caption = 'getUpdates'
-      ClientHeight = 215
-      ClientWidth = 735
+      ClientHeight = 209
+      ClientWidth = 733
       object EdtOffset: TSpinEdit
         Left = 16
         Height = 28
@@ -79,13 +79,13 @@ object FrmMain: TFrmMain
     end
     object TbShtMyCommands: TTabSheet
       Caption = 'MyCommands'
-      ClientHeight = 215
-      ClientWidth = 735
+      ClientHeight = 209
+      ClientWidth = 733
       object TbCntrlMyCommands: TTabControl
         Left = 0
-        Height = 215
+        Height = 209
         Top = 0
-        Width = 735
+        Width = 733
         TabIndex = 0
         Tabs.Strings = (
           'getMyCommands'
@@ -97,7 +97,7 @@ object FrmMain: TFrmMain
           Left = 2
           Height = 33
           Top = 28
-          Width = 731
+          Width = 729
           Caption = 'TlBrsetMyCommands'
           TabOrder = 1
           object BtnClear: TButton
@@ -106,8 +106,8 @@ object FrmMain: TFrmMain
             Top = 2
             Width = 94
             Caption = '🆑 clear'
-            OnClick = BtnClearClick
             TabOrder = 0
+            OnClick = BtnClearClick
           end
           object CmbBxCommandScope: TComboBox
             Left = 95
@@ -162,9 +162,9 @@ object FrmMain: TFrmMain
         end
         object VlLstEdtrCommands: TValueListEditor
           Left = 2
-          Height = 152
+          Height = 146
           Top = 61
-          Width = 731
+          Width = 729
           Align = alClient
           DefaultColWidth = 160
           FixedCols = 0
@@ -184,18 +184,18 @@ object FrmMain: TFrmMain
           )
           ColWidths = (
             160
-            570
+            568
           )
         end
       end
     end
     object TbShtSendMessage: TTabSheet
       Caption = 'sendMessage'
-      ClientHeight = 215
-      ClientWidth = 735
+      ClientHeight = 209
+      ClientWidth = 733
       object MmMessage: TMemo
-        Left = 296
-        Height = 215
+        Left = 294
+        Height = 209
         Top = 0
         Width = 439
         Align = alRight
@@ -271,8 +271,8 @@ object FrmMain: TFrmMain
       Top = 5
       Width = 110
       Caption = 'Send'
-      OnClick = BtnSendRequestClick
       TabOrder = 1
+      OnClick = BtnSendRequestClick
     end
   end
   object JSONPrpStrg: TJSONPropStorage

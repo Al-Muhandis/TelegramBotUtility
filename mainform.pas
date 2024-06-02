@@ -41,7 +41,7 @@ type
     TbShtGetMe: TTabSheet;
     TlBrsetMyCommands: TToolBar;
     VlLstEdtrCommands: TValueListEditor;
-    procedure BtnClearClick(Sender: TObject);
+    procedure BtnClearClick({%H-}Sender: TObject);
     procedure BtnSendRequestClick({%H-}Sender: TObject);
     procedure ExtractScopeFromControls(aScope: TBotCommandScope);
     procedure GetMyCommands(aBot: TTelegramSender);
