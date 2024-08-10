@@ -17,6 +17,7 @@ type
     BtnSendRequest: TButton;
     BtnClear: TButton;
     CmbBxCommandScope: TComboBox;
+    CmbbxMarkdown: TComboBox;
     EdtSpecificUserID: TSpinEditEx;
     EdtToken: TLabeledEdit;
     GrpBx: TGroupBox;
@@ -24,6 +25,7 @@ type
     EdtWebhookUrl: TLabeledEdit;
     EdtBotUsername: TLabeledEdit;
     Label1: TLabel;
+    Label2: TLabel;
     LblReceiverChatID: TLabel;
     MmMessage: TMemo;
     MmResponse: TMemo;
@@ -88,6 +90,7 @@ var
   aToken: String;
   aBot: TTelegramSender;
   aWebHookInfo: TTelegramWebhookInfo;
+  aParseMode: TParseMode;
 begin
   aToken:=EdtToken.Text;
   aBot:=TTelegramSender.Create(aToken);
@@ -125,7 +128,8 @@ begin
       end;
       if PgCntrl.ActivePage=TbShtSendMessage then
       begin
-        aBot.sendMessage(EdtReceiverChatID.Value, MmMessage.Text);
+        aParseMode:=TParseMode(CmbbxMarkdown.ItemIndex);
+        aBot.sendMessage(EdtReceiverChatID.Value, MmMessage.Text, aParseMode);
         Exit;
       end;
     finally

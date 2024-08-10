@@ -1,7 +1,7 @@
 object FrmMain: TFrmMain
-  Left = 389
+  Left = 878
   Height = 634
-  Top = 229
+  Top = 163
   Width = 741
   Caption = 'Telegram bot utility'
   ClientHeight = 634
@@ -184,7 +184,7 @@ object FrmMain: TFrmMain
           )
           ColWidths = (
             160
-            568
+            547
           )
         end
       end
@@ -221,6 +221,29 @@ object FrmMain: TFrmMain
         Caption = 'Receiver chat id'
         FocusControl = EdtReceiverChatID
         ParentColor = False
+      end
+      object CmbbxMarkdown: TComboBox
+        Left = 0
+        Height = 28
+        Top = 88
+        Width = 285
+        ItemHeight = 20
+        ItemIndex = 0
+        Items.Strings = (
+          'Default'
+          'Markdown'
+          'HTML'
+          'Markdown_V2'
+        )
+        TabOrder = 2
+        Text = 'Default'
+      end
+      object Label2: TLabel
+        Left = 8
+        Height = 20
+        Top = 64
+        Width = 161
+        Caption = 'Parse mode (markdown)'
       end
     end
   end
