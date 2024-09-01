@@ -184,29 +184,29 @@ object FrmMain: TFrmMain
           )
           ColWidths = (
             160
-            547
+            568
           )
         end
       end
     end
-    object TbShtSendMessage: TTabSheet
+    object TbShtSend: TTabSheet
       Caption = 'sendMessage'
       ClientHeight = 209
       ClientWidth = 733
       object MmMessage: TMemo
         Left = 294
-        Height = 209
-        Top = 0
+        Height = 129
+        Top = 80
         Width = 439
         Align = alRight
         ScrollBars = ssAutoBoth
         TabOrder = 0
       end
       object EdtReceiverChatID: TSpinEditEx
-        Left = 0
+        Left = 8
         Height = 28
-        Top = 32
-        Width = 288
+        Top = 111
+        Width = 280
         MaxLength = 0
         TabOrder = 1
         NullValue = 0
@@ -216,17 +216,17 @@ object FrmMain: TFrmMain
       object LblReceiverChatID: TLabel
         Left = 8
         Height = 20
-        Top = 10
+        Top = 89
         Width = 105
         Caption = 'Receiver chat id'
         FocusControl = EdtReceiverChatID
         ParentColor = False
       end
       object CmbbxMarkdown: TComboBox
-        Left = 0
+        Left = 8
         Height = 28
-        Top = 88
-        Width = 285
+        Top = 167
+        Width = 277
         ItemHeight = 20
         ItemIndex = 0
         Items.Strings = (
@@ -241,9 +241,39 @@ object FrmMain: TFrmMain
       object Label2: TLabel
         Left = 8
         Height = 20
-        Top = 64
+        Top = 143
         Width = 161
         Caption = 'Parse mode (markdown)'
+      end
+      object PgCntrlSend: TPageControl
+        Left = 0
+        Height = 80
+        Top = 0
+        Width = 733
+        ActivePage = TbShtSendMessage
+        Align = alTop
+        TabIndex = 0
+        TabOrder = 3
+        object TbShtSendMessage: TTabSheet
+          Caption = 'sendMessage'
+        end
+        object TbShtSendDocument: TTabSheet
+          Caption = 'sendDocument'
+          ClientHeight = 47
+          ClientWidth = 725
+          object FlNmEdtDocument: TFileNameEdit
+            Left = 16
+            Height = 28
+            Top = 8
+            Width = 689
+            FilterIndex = 0
+            HideDirectories = False
+            ButtonWidth = 29
+            NumGlyphs = 1
+            MaxLength = 0
+            TabOrder = 0
+          end
+        end
       end
     end
   end
@@ -301,7 +331,7 @@ object FrmMain: TFrmMain
   object JSONPrpStrg: TJSONPropStorage
     StoredValues = <>
     Formatted = False
-    Left = 452
-    Top = 72
+    Left = 464
+    Top = 8
   end
 end

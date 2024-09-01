@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, ComCtrls, JSONPropStorage, Spin, ValEdit,
-  tgtypes, SynEdit, SpinEx, tgsendertypes
+  EditBtn, tgtypes, SynEdit, SpinEx, tgsendertypes
   ;
 
 type
@@ -20,6 +20,7 @@ type
     CmbbxMarkdown: TComboBox;
     EdtSpecificUserID: TSpinEditEx;
     EdtToken: TLabeledEdit;
+    FlNmEdtDocument: TFileNameEdit;
     GrpBx: TGroupBox;
     JSONPrpStrg: TJSONPropStorage;
     EdtWebhookUrl: TLabeledEdit;
@@ -29,12 +30,15 @@ type
     LblReceiverChatID: TLabel;
     MmMessage: TMemo;
     MmResponse: TMemo;
+    PgCntrlSend: TPageControl;
     PgCntrl: TPageControl;
     EdtOffset: TSpinEdit;
     EdtSpecificChatID: TSpinEditEx;
     EdtReceiverChatID: TSpinEditEx;
     Spltr: TSplitter;
+    TbShtSendDocument: TTabSheet;
     TbShtSendMessage: TTabSheet;
+    TbShtSend: TTabSheet;
     TbCntrlMyCommands: TTabControl;
     TbShtMyCommands: TTabSheet;
     TbShtGetUpdates: TTabSheet;
@@ -48,8 +52,6 @@ type
     procedure ExtractScopeFromControls(aScope: TBotCommandScope);
     procedure GetMyCommands(aBot: TTelegramSender);
     procedure SetMyCommands(aBot: TTelegramSender);
-  private
-
   public
 
   end;
@@ -88,9 +90,9 @@ end;
 procedure TFrmMain.BtnSendRequestClick(Sender: TObject);
 var
   aToken: String;
-  aBot: TTelegramSender;
   aWebHookInfo: TTelegramWebhookInfo;
   aParseMode: TParseMode;
+  aBot: TTelegramSender;
 begin
   aToken:=EdtToken.Text;
   aBot:=TTelegramSender.Create(aToken);
@@ -126,11 +128,19 @@ begin
           GetMyCommands(aBot);
         Exit;
       end;
-      if PgCntrl.ActivePage=TbShtSendMessage then
+      if PgCntrl.ActivePage=TbShtSend then
       begin
-        aParseMode:=TParseMode(CmbbxMarkdown.ItemIndex);
-        aBot.sendMessage(EdtReceiverChatID.Value, MmMessage.Text, aParseMode);
-        Exit;
+        if PgCntrlSend.ActivePage=TbShtSendMessage then
+        begin
+          aParseMode:=TParseMode(CmbbxMarkdown.ItemIndex);
+          aBot.sendMessage(EdtReceiverChatID.Value, MmMessage.Text, aParseMode);
+          Exit;
+        end;
+        if PgCntrlSend.ActivePage=TbShtSendDocument then
+        begin
+          aBot.sendDocumentByFileName(EdtReceiverChatID.Value, FlNmEdtDocument.FileName, MmMessage.Text);
+          Exit;
+        end;
       end;
     finally
       MmResponse.Lines.Text:=BeautifyJSONString(aBot.Response);
@@ -174,21 +184,21 @@ end;
 
 procedure TFrmMain.SetMyCommands(aBot: TTelegramSender);
 var
-  aBotCommands: TBotCommandArray;
+  FBotCommands: TBotCommandArray;
   i: Integer;
   aScope: TBotCommandScope;
 begin
-  aBotCommands:=TBotCommandArray.Create();
+  FBotCommands:=TBotCommandArray.Create();
   aScope:=TBotCommandScope.Create;
   try
     for i:=1 to VlLstEdtrCommands.Strings.Count do
       with VlLstEdtrCommands do
-        aBotCommands.AddCommand(Keys[i], Values[Keys[i]]);
+        FBotCommands.AddCommand(Keys[i], Values[Keys[i]]);
     ExtractScopeFromControls(aScope);
-    aBot.setMyCommands(aBotCommands, aScope);
+    aBot.setMyCommands(FBotCommands, aScope);
   finally
     aScope.Free;
-    aBotCommands.Free;
+    FBotCommands.Free;
   end;
 end;
 
