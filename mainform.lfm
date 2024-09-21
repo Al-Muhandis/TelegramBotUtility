@@ -7,7 +7,7 @@ object FrmMain: TFrmMain
   ClientHeight = 634
   ClientWidth = 741
   DesignTimePPI = 120
-  SessionProperties = 'EdtToken.Text;VlLstEdtrCommands.Strings;Spltr.Top'
+  SessionProperties = 'EdtToken.Text;Spltr.Top;VlLstEdtrCommands.Strings;EdtReceiverChatID.Value'
   ShowHint = True
   LCLVersion = '3.4.0.0'
   object PgCntrl: TPageControl
@@ -184,13 +184,13 @@ object FrmMain: TFrmMain
           )
           ColWidths = (
             160
-            568
+            547
           )
         end
       end
     end
     object TbShtSend: TTabSheet
-      Caption = 'sendMessage'
+      Caption = 'Send'
       ClientHeight = 209
       ClientWidth = 733
       object MmMessage: TMemo
@@ -238,7 +238,7 @@ object FrmMain: TFrmMain
         TabOrder = 2
         Text = 'Default'
       end
-      object Label2: TLabel
+      object LblSendParseMode: TLabel
         Left = 8
         Height = 20
         Top = 143

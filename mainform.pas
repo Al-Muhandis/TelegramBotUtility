@@ -26,7 +26,7 @@ type
     EdtWebhookUrl: TLabeledEdit;
     EdtBotUsername: TLabeledEdit;
     Label1: TLabel;
-    Label2: TLabel;
+    LblSendParseMode: TLabel;
     LblReceiverChatID: TLabel;
     MmMessage: TMemo;
     MmResponse: TMemo;
