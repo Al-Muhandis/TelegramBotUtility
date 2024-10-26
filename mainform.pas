@@ -16,6 +16,7 @@ type
   TFrmMain = class(TForm)
     BtnSendRequest: TButton;
     BtnClear: TButton;
+    ChckGrpAllowedUpdates: TCheckGroup;
     CmbBxCommandScope: TComboBox;
     CmbbxMarkdown: TComboBox;
     EdtSpecificUserID: TSpinEditEx;
@@ -50,8 +51,14 @@ type
     procedure BtnClearClick({%H-}Sender: TObject);
     procedure BtnSendRequestClick({%H-}Sender: TObject);
     procedure ExtractScopeFromControls(aScope: TBotCommandScope);
+    procedure FormCreate({%H-}Sender: TObject);
     procedure GetMyCommands(aBot: TTelegramSender);
     procedure SetMyCommands(aBot: TTelegramSender);
+  private
+    function GetAllowedUpdates: TUpdateSet;
+    procedure SetAllowedUpdates(AValue: TUpdateSet);
+  protected
+    property AllowedUpdates: TUpdateSet read GetAllowedUpdates write SetAllowedUpdates;
   public
 
   end;
@@ -112,7 +119,7 @@ begin
       end;
       if PgCntrl.ActivePage=TbShtSetWebhook then
       begin
-        aBot.setWebhook(EdtWebhookUrl.Text);
+        aBot.setWebhook(EdtWebhookUrl.Text, 0, AllowedUpdates);
         Exit;
       end;
       if PgCntrl.ActivePage=TbShtGetUpdates then
@@ -164,6 +171,14 @@ begin
     aScope.UserID:=EdtSpecificUserID.Value;
 end;
 
+procedure TFrmMain.FormCreate(Sender: TObject);
+var
+  i: TUpdateType;
+begin
+  for i in TUpdateType do
+    ChckGrpAllowedUpdates.Items.Add(UpdateTypeAliases[i]);
+end;
+
 procedure TFrmMain.GetMyCommands(aBot: TTelegramSender);
 var
   aScope: TBotCommandScope;
@@ -200,6 +215,24 @@ begin
     aScope.Free;
     FBotCommands.Free;
   end;
+end;
+
+function TFrmMain.GetAllowedUpdates: TUpdateSet;
+var
+  i: TUpdateType;
+begin
+  Result:=[];
+  for i in TUpdateType do
+    if ChckGrpAllowedUpdates.Checked[Ord(i)] then
+      Include(Result, i);
+end;
+
+procedure TFrmMain.SetAllowedUpdates(AValue: TUpdateSet);
+var
+  i: TUpdateType;
+begin
+  for i in TUpdateType do
+    ChckGrpAllowedUpdates.Checked[Ord(i)]:=i in AValue;
 end;
 
 end.

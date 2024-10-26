@@ -7,9 +7,10 @@ object FrmMain: TFrmMain
   ClientHeight = 634
   ClientWidth = 741
   DesignTimePPI = 120
+  OnCreate = FormCreate
   SessionProperties = 'EdtToken.Text;Spltr.Top;VlLstEdtrCommands.Strings;EdtReceiverChatID.Value'
   ShowHint = True
-  LCLVersion = '3.4.0.0'
+  LCLVersion = '3.6.0.0'
   object PgCntrl: TPageControl
     Left = 0
     Height = 242
@@ -49,12 +50,33 @@ object FrmMain: TFrmMain
         Left = 16
         Height = 28
         Top = 32
-        Width = 640
+        Width = 704
+        Anchors = [akTop, akLeft, akRight]
         EditLabel.Height = 20
-        EditLabel.Width = 640
+        EditLabel.Width = 704
         EditLabel.Caption = 'Webhook URL'
         EditLabel.ParentColor = False
         TabOrder = 0
+      end
+      object ChckGrpAllowedUpdates: TCheckGroup
+        Left = 16
+        Height = 126
+        Hint = 'Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count (default).'#13#10'If only utUnknown specified, the previous setting will be used.'#13#10'Please note that this parameter doesn''t affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.'
+        Top = 72
+        Width = 704
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        AutoFill = True
+        Caption = 'Allowed updates'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.TopBottomSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 4
+        Columns = 4
+        TabOrder = 1
       end
     end
     object TbShtGetUpdates: TTabSheet
@@ -184,7 +206,7 @@ object FrmMain: TFrmMain
           )
           ColWidths = (
             160
-            547
+            568
           )
         end
       end
@@ -194,11 +216,12 @@ object FrmMain: TFrmMain
       ClientHeight = 209
       ClientWidth = 733
       object MmMessage: TMemo
-        Left = 294
+        Left = 240
         Height = 129
         Top = 80
-        Width = 439
+        Width = 493
         Align = alRight
+        Anchors = [akTop, akLeft, akRight, akBottom]
         ScrollBars = ssAutoBoth
         TabOrder = 0
       end
@@ -206,7 +229,7 @@ object FrmMain: TFrmMain
         Left = 8
         Height = 28
         Top = 111
-        Width = 280
+        Width = 227
         MaxLength = 0
         TabOrder = 1
         NullValue = 0
@@ -226,7 +249,7 @@ object FrmMain: TFrmMain
         Left = 8
         Height = 28
         Top = 167
-        Width = 277
+        Width = 229
         ItemHeight = 20
         ItemIndex = 0
         Items.Strings = (
