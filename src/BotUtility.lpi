@@ -18,6 +18,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="2"/>
+      <BuildNr Value="1"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="Default" Default="True"/>
@@ -148,17 +149,4 @@
       </Options>
     </Linking>
   </CompilerOptions>
-  <Debugging>
-    <Exceptions>
-      <Item>
-        <Name Value="EAbort"/>
-      </Item>
-      <Item>
-        <Name Value="ECodetoolError"/>
-      </Item>
-      <Item>
-        <Name Value="EFOpenError"/>
-      </Item>
-    </Exceptions>
-  </Debugging>
 </CONFIG>
