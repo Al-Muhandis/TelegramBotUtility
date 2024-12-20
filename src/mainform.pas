@@ -182,11 +182,18 @@ end;
 procedure TFrmMain.GetMyCommands(aBot: TTelegramSender);
 var
   aScope: TBotCommandScope;
+  aCommandEnum: TJSONEnum;
 begin
   aScope:=TBotCommandScope.Create;
   try
     ExtractScopeFromControls(aScope);
-    aBot.getMyCommands(aScope);
+    if aBot.getMyCommands(aScope) then
+    begin
+      VlLstEdtrCommands.Clear;
+      for aCommandEnum in (aBot.JSONResponse as TJSONArray) do
+        with (aCommandEnum.Value as TJSONObject) do
+          VlLstEdtrCommands.InsertRow(Strings['command'], Strings['description'], True);
+    end;
   finally
     aScope.Free;
   end;

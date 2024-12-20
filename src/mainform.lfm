@@ -206,7 +206,7 @@ object FrmMain: TFrmMain
           )
           ColWidths = (
             160
-            568
+            547
           )
         end
       end
