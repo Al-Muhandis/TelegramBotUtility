@@ -98,7 +98,6 @@ end;
 procedure TFrmMain.BtnSendRequestClick(Sender: TObject);
 var
   aToken: String;
-  aWebHookInfo: TTelegramWebhookInfo;
   aParseMode: TParseMode;
   aBot: TTelegramSender;
 begin
