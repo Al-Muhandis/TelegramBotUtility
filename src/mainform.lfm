@@ -10,7 +10,7 @@ object FrmMain: TFrmMain
   OnCreate = FormCreate
   SessionProperties = 'EdtToken.Text;Spltr.Top;VlLstEdtrCommands.Strings;EdtReceiverChatID.Value'
   ShowHint = True
-  LCLVersion = '3.6.0.0'
+  LCLVersion = '3.8.0.0'
   object PgCntrl: TPageControl
     Left = 0
     Height = 242
@@ -39,44 +39,55 @@ object FrmMain: TFrmMain
         TabOrder = 0
       end
     end
-    object TbShtGetWebhookInfo: TTabSheet
-      Caption = 'getWebhookInfo'
-    end
-    object TbShtSetWebhook: TTabSheet
-      Caption = 'setWebhook'
+    object TbShtWebhook: TTabSheet
+      Caption = 'Webhook'
       ClientHeight = 209
       ClientWidth = 733
-      object EdtWebhookUrl: TLabeledEdit
-        Left = 16
-        Height = 28
-        Top = 32
-        Width = 704
-        Anchors = [akTop, akLeft, akRight]
-        EditLabel.Height = 20
-        EditLabel.Width = 704
-        EditLabel.Caption = 'Webhook URL'
-        EditLabel.ParentColor = False
+      object TbCntrlWebhook: TTabControl
+        Left = 0
+        Height = 209
+        Top = 0
+        Width = 733
+        Style = tsButtons
+        TabIndex = 0
+        Tabs.Strings = (
+          'getWebhookInfo'
+          'setWebhook'
+        )
+        Align = alClient
         TabOrder = 0
-      end
-      object ChckGrpAllowedUpdates: TCheckGroup
-        Left = 16
-        Height = 126
-        Hint = 'Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count (default).'#13#10'If only utUnknown specified, the previous setting will be used.'#13#10'Please note that this parameter doesn''t affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.'
-        Top = 72
-        Width = 704
-        Anchors = [akTop, akLeft, akRight, akBottom]
-        AutoFill = True
-        Caption = 'Allowed updates'
-        ChildSizing.LeftRightSpacing = 6
-        ChildSizing.TopBottomSpacing = 6
-        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-        ChildSizing.EnlargeVertical = crsHomogenousChildResize
-        ChildSizing.ShrinkHorizontal = crsScaleChilds
-        ChildSizing.ShrinkVertical = crsScaleChilds
-        ChildSizing.Layout = cclLeftToRightThenTopToBottom
-        ChildSizing.ControlsPerLine = 4
-        Columns = 4
-        TabOrder = 1
+        object EdtWebhookUrl: TLabeledEdit
+          Left = 16
+          Height = 28
+          Top = 32
+          Width = 712
+          Anchors = [akTop, akLeft, akRight]
+          EditLabel.Height = 20
+          EditLabel.Width = 712
+          EditLabel.Caption = 'Webhook URL'
+          EditLabel.ParentColor = False
+          TabOrder = 1
+        end
+        object ChckGrpAllowedUpdates: TCheckGroup
+          Left = 16
+          Height = 127
+          Hint = 'Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count (default).'#13#10'If only utUnknown specified, the previous setting will be used.'#13#10'Please note that this parameter doesn''t affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.'
+          Top = 72
+          Width = 712
+          Anchors = [akTop, akLeft, akRight, akBottom]
+          AutoFill = True
+          Caption = 'Allowed updates'
+          ChildSizing.LeftRightSpacing = 6
+          ChildSizing.TopBottomSpacing = 6
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.EnlargeVertical = crsHomogenousChildResize
+          ChildSizing.ShrinkHorizontal = crsScaleChilds
+          ChildSizing.ShrinkVertical = crsScaleChilds
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 4
+          Columns = 4
+          TabOrder = 2
+        end
       end
     end
     object TbShtGetUpdates: TTabSheet
@@ -206,7 +217,7 @@ object FrmMain: TFrmMain
           )
           ColWidths = (
             160
-            547
+            568
           )
         end
       end
@@ -307,6 +318,7 @@ object FrmMain: TFrmMain
     Width = 741
     Align = alBottom
     Anchors = [akTop, akLeft, akRight, akBottom]
+    Color = clBtnFace
     ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 1
@@ -326,7 +338,7 @@ object FrmMain: TFrmMain
     Top = 0
     Width = 741
     Align = alTop
-    Caption = 'GrpBx'
+    Caption = 'Send telegram method'
     ClientHeight = 71
     ClientWidth = 737
     TabOrder = 3

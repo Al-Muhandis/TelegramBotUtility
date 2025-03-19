@@ -5,8 +5,8 @@ unit MainForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, ComCtrls, JSONPropStorage, Spin, ValEdit,
-  EditBtn, tgtypes, SynEdit, SpinEx, tgsendertypes
+  Classes, SysUtils, Forms, Controls, Dialogs, ExtCtrls, StdCtrls, ComCtrls, JSONPropStorage, Spin, ValEdit,
+  EditBtn, tgtypes, SpinEx, tgsendertypes
   ;
 
 type
@@ -37,14 +37,14 @@ type
     EdtSpecificChatID: TSpinEditEx;
     EdtReceiverChatID: TSpinEditEx;
     Spltr: TSplitter;
+    TbCntrlWebhook: TTabControl;
     TbShtSendDocument: TTabSheet;
     TbShtSendMessage: TTabSheet;
     TbShtSend: TTabSheet;
     TbCntrlMyCommands: TTabControl;
     TbShtMyCommands: TTabSheet;
     TbShtGetUpdates: TTabSheet;
-    TbShtSetWebhook: TTabSheet;
-    TbShtGetWebhookInfo: TTabSheet;
+    TbShtWebhook: TTabSheet;
     TbShtGetMe: TTabSheet;
     TlBrsetMyCommands: TToolBar;
     VlLstEdtrCommands: TValueListEditor;
@@ -53,6 +53,7 @@ type
     procedure ExtractScopeFromControls(aScope: TBotCommandScope);
     procedure FormCreate({%H-}Sender: TObject);
     procedure GetMyCommands(aBot: TTelegramSender);
+    procedure GetWebhookInfo(aBot: TTelegramSender);
     procedure SetMyCommands(aBot: TTelegramSender);
   private
     function GetAllowedUpdates: TUpdateSet;
@@ -111,15 +112,12 @@ begin
         EdtBotUsername.Text:=aBot.BotUsername;
         Exit;
       end;
-      if PgCntrl.ActivePage=TbShtGetWebhookInfo then
+      if PgCntrl.ActivePage=TbShtWebhook then
       begin
-        aBot.getWebhookInfo(aWebHookInfo);
-        aWebHookInfo.Free;
-        Exit;
-      end;
-      if PgCntrl.ActivePage=TbShtSetWebhook then
-      begin
-        aBot.setWebhook(EdtWebhookUrl.Text, 0, AllowedUpdates);
+        if TbCntrlWebhook.TabIndex=1 then
+          aBot.setWebhook(EdtWebhookUrl.Text, 0, AllowedUpdates)
+        else
+          GetWebhookInfo(aBot);
         Exit;
       end;
       if PgCntrl.ActivePage=TbShtGetUpdates then
@@ -196,6 +194,21 @@ begin
     end;
   finally
     aScope.Free;
+  end;
+end;
+
+procedure TFrmMain.GetWebhookInfo(aBot: TTelegramSender);
+var
+  aWebHookInfo: TTelegramWebhookInfo;
+begin
+  if aBot.getWebhookInfo(aWebHookInfo) then
+  begin
+    try
+      EdtWebhookUrl.Text:=aWebHookInfo.Url;
+      AllowedUpdates:=aWebHookInfo.AllowedUpdates;
+    finally
+      aWebHookInfo.Free;
+    end;
   end;
 end;
 
