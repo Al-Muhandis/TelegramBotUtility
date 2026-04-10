@@ -19,8 +19,8 @@ type
     ChckGrpAllowedUpdates: TCheckGroup;
     CmbBxCommandScope: TComboBox;
     CmbbxMarkdown: TComboBox;
+    CmbBxToken: TComboBox;
     EdtSpecificUserID: TSpinEditEx;
-    EdtToken: TLabeledEdit;
     FlNmEdtDocument: TFileNameEdit;
     GrpBx: TGroupBox;
     JSONPrpStrg: TJSONPropStorage;
@@ -50,6 +50,7 @@ type
     VlLstEdtrCommands: TValueListEditor;
     procedure BtnClearClick({%H-}Sender: TObject);
     procedure BtnSendRequestClick({%H-}Sender: TObject);
+    procedure CmbBxTokenEditingDone(Sender: TObject);
     procedure ExtractScopeFromControls(aScope: TBotCommandScope);
     procedure FormCreate({%H-}Sender: TObject);
     procedure GetMyCommands(aBot: TTelegramSender);
@@ -93,6 +94,18 @@ begin
   end;
 end;
 
+function TrimToken(aToken: String): String;
+var
+  aAtNum: SizeInt;
+begin
+  aAtNum:=Pos('@', aToken);
+  if aAtNum>0 then
+    Result:=LeftStr(aToken, aAtNum-1)
+  else
+    Result:=aToken;
+  Result:=Trim(Result);
+end;
+
 { TFrmMain }
 
 procedure TFrmMain.BtnSendRequestClick(Sender: TObject);
@@ -100,8 +113,18 @@ var
   aToken: String;
   aParseMode: TParseMode;
   aBot: TTelegramSender;
+
+  procedure AddToHistory(const aToken: String);
+  var
+    aKeyword: String;
+  begin
+    aKeyword:=aToken+' @'+EdtBotUsername.Text;
+    if CmbBxToken.Items.IndexOf(aKeyword) = -1 then
+      CmbBxToken.AddHistoryItem(aKeyword, 10, False, False);
+  end;
 begin
-  aToken:=EdtToken.Text;
+  aToken:=TrimToken(CmbBxToken.Text);
+  CmbBxToken.Text:=aToken;
   aBot:=TTelegramSender.Create(aToken);
   try
     try
@@ -109,6 +132,9 @@ begin
       begin
         aBot.getMe;
         EdtBotUsername.Text:=aBot.BotUsername;
+
+        AddToHistory(aToken);
+
         Exit;
       end;
       if PgCntrl.ActivePage=TbShtWebhook then
@@ -152,6 +178,12 @@ begin
   finally
     aBot.Free;
   end;
+end;
+
+procedure TFrmMain.CmbBxTokenEditingDone(Sender: TObject);
+begin
+  if CmbBxToken.ItemIndex>-1 then
+    CmbBxToken.Text:=TrimToken(CmbBxToken.Items[CmbBxToken.ItemIndex]);
 end;
 
 procedure TFrmMain.ExtractScopeFromControls(aScope: TBotCommandScope);

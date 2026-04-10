@@ -7,10 +7,10 @@ object FrmMain: TFrmMain
   ClientHeight = 634
   ClientWidth = 741
   DesignTimePPI = 120
-  OnCreate = FormCreate
-  SessionProperties = 'EdtToken.Text;Spltr.Top;VlLstEdtrCommands.Strings;EdtReceiverChatID.Value'
+  SessionProperties = 'EdtReceiverChatID.Value;EdtToken.Text;Spltr.Top;VlLstEdtrCommands.Strings;CmbBxToken.Items;CmbBxToken.Text'
   ShowHint = True
-  LCLVersion = '3.8.0.0'
+  LCLVersion = '4.6.0.0'
+  OnCreate = FormCreate
   object PgCntrl: TPageControl
     Left = 0
     Height = 242
@@ -168,6 +168,7 @@ object FrmMain: TFrmMain
             NumbersOnly = True
             ParentShowHint = False
             ShowHint = True
+            SpinButtonWidth = 17
             TabOrder = 2
             TextHint = 'chat_id'
             NullValue = 0
@@ -185,6 +186,7 @@ object FrmMain: TFrmMain
             NumbersOnly = True
             ParentShowHint = False
             ShowHint = True
+            SpinButtonWidth = 17
             TabOrder = 3
             TextHint = 'user_id'
             NullValue = 0
@@ -200,7 +202,6 @@ object FrmMain: TFrmMain
           Width = 729
           Align = alClient
           DefaultColWidth = 160
-          FixedCols = 0
           Flat = True
           RowCount = 3
           TabOrder = 2
@@ -217,7 +218,7 @@ object FrmMain: TFrmMain
           )
           ColWidths = (
             160
-            568
+            547
           )
         end
       end
@@ -242,6 +243,7 @@ object FrmMain: TFrmMain
         Top = 111
         Width = 227
         MaxLength = 0
+        SpinButtonWidth = 17
         TabOrder = 1
         NullValue = 0
         UpDownVisible = False
@@ -342,30 +344,28 @@ object FrmMain: TFrmMain
     ClientHeight = 71
     ClientWidth = 737
     TabOrder = 3
-    object EdtToken: TLabeledEdit
-      Left = 16
-      Height = 28
-      Top = 24
-      Width = 592
-      EditLabel.Height = 20
-      EditLabel.Width = 592
-      EditLabel.Caption = 'Bot''s token'
-      EditLabel.ParentColor = False
-      TabOrder = 0
-    end
     object BtnSendRequest: TButton
       Left = 616
       Height = 47
       Top = 5
       Width = 110
       Caption = 'Send'
-      TabOrder = 1
+      TabOrder = 0
       OnClick = BtnSendRequestClick
+    end
+    object CmbBxToken: TComboBox
+      Left = 16
+      Height = 28
+      Top = 24
+      Width = 592
+      ItemHeight = 20
+      TabOrder = 1
+      OnEditingDone = CmbBxTokenEditingDone
     end
   end
   object JSONPrpStrg: TJSONPropStorage
     StoredValues = <>
-    Formatted = False
+    Formatted = True
     Left = 464
     Top = 8
   end
