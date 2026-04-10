@@ -103,6 +103,9 @@
     </RunParams>
     <RequiredPackages>
       <Item>
+        <PackageName Value="LCL"/>
+      </Item>
+      <Item>
         <PackageName Value="LazControls"/>
       </Item>
       <Item>
