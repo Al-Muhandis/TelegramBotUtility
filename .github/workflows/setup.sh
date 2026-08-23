@@ -10,4 +10,4 @@ sudo bash -c '
 
 declare -rx INSTANTFPCOPTIONS='-Fu/usr/lib/lazarus/*/components/lazutils'
 
-instantfpc '.github/workflows/main.pas' build
+instantfpc '.github/workflows/make.pas' build
