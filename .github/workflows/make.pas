@@ -107,7 +107,7 @@ begin
   then OutLog(etError, SelectString(Result, '(Fatal|Error|/ld(\.[a-z]+)?):'))
   else begin
     for Text in Result.Split(LineEnding) do
-      if Text.Contains('Linking') then Result += Text.Split(' ')[2].Replace(LineEnding, EmptyStr);
+      if Text.Contains('Linking') then Result := Text.Split(' ')[2].Replace(LineEnding, EmptyStr);
     OutLog(etInfo, #9'to:'#9 + Result + #10);
     Text := ReadFileToString(ChangeFileExt(Path, '.lpr'));
     if Text.Contains('program') and
