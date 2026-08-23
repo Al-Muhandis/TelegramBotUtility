@@ -97,7 +97,7 @@ begin
   {$ENDIF}
 end;
 
-function BuildProject(const Path: string): string;
+function BuildProject(const Path: string): string; cdecl;
 var Text: string;
 begin
   OutLog(etDebug, 'BuildProject from:'#9 + Path);
@@ -105,12 +105,7 @@ begin
     ['--build-all', '--recursive', {$IFDEF UNIX} {'--widgetset=qt',} '--opt=-dWITH_GTK2_IM', {$ENDIF} '--no-write-project', Path], Result, [poStderrToOutPut, poWaitOnExit])
   then OutLog(etError, SelectString(Result, '(Fatal|Error|/ld(\.[a-z]+)?):'))
   else begin
-    Text := SelectString(Result, 'Linking');
-    if Length(Text.Split(' ')) < 3 then begin
-      OutLog(etError, 'BuildProject: could not find "Linking" line in lazbuild output for:'#9 + Path);
-      Exit;
-    end;
-    Result := Text.Split(' ')[2].Replace(LineEnding, EmptyStr);
+    Result := SelectString(Result, 'Linking').Split(' ')[2].Replace(LineEnding, EmptyStr);
     OutLog(etInfo, #9'to:'#9 + Result + #10);
     Text := ReadFileToString(ChangeFileExt(Path, '.lpr'));
     if Text.Contains('program') and

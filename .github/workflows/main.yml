@@ -2,12 +2,9 @@
 name: Make
 
 on:
-  push:
-    branches:
-      - "**"
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
