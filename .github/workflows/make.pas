@@ -105,7 +105,7 @@ begin
     ['--build-all', '--recursive', {$IFDEF UNIX} {'--widgetset=qt',} '--opt=-dWITH_GTK2_IM', {$ENDIF} '--no-write-project', Path], Result, [poStderrToOutPut, poWaitOnExit])
   then OutLog(etError, SelectString(Result, '(Fatal|Error|/ld(\.[a-z]+)?):'))
   else begin
-    Result := SelectString(Result, 'Linking').Replace(LineEnding, EmptyStr);
+    // Result := SelectString(Result, 'Linking').Split(' ')[2].Replace(LineEnding, EmptyStr);
     OutLog(etInfo, #9'to:'#9 + Result + #10);
     Text := ReadFileToString(ChangeFileExt(Path, '.lpr'));
     if Text.Contains('program') and
